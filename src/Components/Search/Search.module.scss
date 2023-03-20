@@ -1,0 +1,43 @@
+.root {
+  position: relative;
+
+  .search {
+    width: 24px;
+    height: 24px;
+
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    opacity: 0.5;
+  }
+
+  .clear {
+    width: 24px;
+    height: 24px;
+
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    opacity: 0.5;
+
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .input {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 40px;
+    width: 400px;
+    border-radius: 10px;
+    font-size: 16px;
+
+    &:focus {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+}
