@@ -1,5 +1,12 @@
+import CartBlock from '../Components/CartBlock/CartBlock'
+import CartEmptyBlock from '../Components/CartEmptyBlock/CartEmptyBlock'
+
 const Cart = () => {
-  return <div>Cart will be here</div>
+  return (
+    <>
+      <CartBlock />
+    </>
+  )
 }
 
 export default Cart
