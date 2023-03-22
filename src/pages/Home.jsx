@@ -7,24 +7,26 @@ import Pagination from '../Components/Pagination/Pagination'
 import PizzaBlock from '../Components/PizzaBlock/PizzaBlock'
 import SkeletonPizzaBlock from '../Components/PizzaBlock/SkeletonPizzaBlock'
 import Sort from '../Components/Sort/Sort'
-import {setCategoryId} from '../redux/slices/filterSlice'
+import {setCategoryId, setCurrentPage} from '../redux/slices/filterSlice'
 
 const Home = () => {
   const {searchValue} = useContext(SearchContext)
   const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
 
-  const {categoryId, sortType} = useSelector((state) => state.filter)
+  const {categoryId, sortType, currentPage, pageSize} = useSelector((state) => state.filter)
   const dispatch = useDispatch()
 
   //Кастыль. MockApi не дает общеее количество items
   const totalItemsCount = 10
-  const pageSize = 4
   const totalPageCount = Math.ceil(totalItemsCount / pageSize)
 
   const onClickCategory = (categoryId) => {
     dispatch(setCategoryId(categoryId))
+  }
+
+  const onClickPage = (pageNumber) => {
+    dispatch(setCurrentPage(pageNumber))
   }
 
   useEffect(() => {
@@ -44,7 +46,7 @@ const Home = () => {
       .catch(() => console.warn(`Some problems with mockAPI, please reload the page`))
       .finally(() => setIsLoading(false))
     window.scrollTo(0, 0)
-  }, [sortType, categoryId, searchValue, currentPage])
+  }, [sortType, categoryId, searchValue, currentPage, pageSize])
 
   const skeletons = [...new Array(6)].map((_, index) => <SkeletonPizzaBlock key={index} />)
   const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
@@ -59,7 +61,7 @@ const Home = () => {
       <div className='content__items'>{isLoading ? skeletons : pizzas}</div>
       <Pagination
         currentPage={currentPage}
-        onPageChanged={setCurrentPage}
+        onPageChanged={onClickPage}
         pageSize={pageSize}
         totalPageCount={totalPageCount}
       />

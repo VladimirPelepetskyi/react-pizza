@@ -7,5 +7,5 @@ export const store = configureStore({
   },
 })
 
-console.log('store', store)
-window.store = store
+// console.log('store', store)
+// window.store = store
