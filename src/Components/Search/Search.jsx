@@ -1,6 +1,10 @@
+import {useContext} from 'react'
+import {SearchContext} from '../../App.jsx'
 import styles from './Search.module.scss'
 
-const Search = ({searchValue, onChangeInput}) => {
+const Search = () => {
+  const {searchValue, setSearchValue} = useContext(SearchContext)
+
   return (
     <div className={styles.root}>
       <svg
@@ -16,14 +20,14 @@ const Search = ({searchValue, onChangeInput}) => {
       <input
         className={styles.input}
         value={searchValue}
-        onChange={(evt) => onChangeInput(evt.currentTarget.value)}
+        onChange={(evt) => setSearchValue(evt.currentTarget.value)}
         type='text'
         placeholder='Найти пиццу...'
       />
       {searchValue && (
         <svg
           className={styles.clear}
-          onClick={() => onChangeInput('')}
+          onClick={() => setSearchValue('')}
           height='48'
           viewBox='0 0 48 48'
           width='48'
