@@ -116,14 +116,17 @@ body {
     cursor: pointer;
     @include noselect();
 
-    span {
+    button {
       display: inline-block;
       margin-left: 7px;
       color: #b6b6b6;
       font-size: 18px;
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
     }
 
-    span,
+    button,
     svg,
     path {
       transition: all $duration ease-in-out;
@@ -135,7 +138,7 @@ body {
           stroke: darken($color: #b6b6b6, $amount: 50);
         }
       }
-      span {
+      button {
         color: darken($color: #b6b6b6, $amount: 50);
       }
     }

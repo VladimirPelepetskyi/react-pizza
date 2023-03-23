@@ -31,6 +31,3 @@ export const filterSlice = createSlice({
 export const {setCategoryId, setSortType, setCurrentPage, setFilters} = filterSlice.actions
 
 export default filterSlice.reducer
-
-// console.log('slice', filterSlice)
-// window.filterSlice = filterSlice
