@@ -1,21 +1,27 @@
 import axios from 'axios'
-import {useContext, useEffect, useState} from 'react'
+import qs from 'qs'
+import {useContext, useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 import {SearchContext} from '../App'
 import Categories from '../Components/Categories/Categories'
 import Pagination from '../Components/Pagination/Pagination'
 import PizzaBlock from '../Components/PizzaBlock/PizzaBlock'
 import SkeletonPizzaBlock from '../Components/PizzaBlock/SkeletonPizzaBlock'
-import Sort from '../Components/Sort/Sort'
-import {setCategoryId, setCurrentPage} from '../redux/slices/filterSlice'
+import Sort, {sortList} from '../Components/Sort/Sort'
+import {setCategoryId, setCurrentPage, setFilters} from '../redux/slices/filterSlice'
 
 const Home = () => {
   const {searchValue} = useContext(SearchContext)
   const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const isSearch = useRef(false)
+  const isMounted = useRef(false)
 
   const {categoryId, sortType, currentPage, pageSize} = useSelector((state) => state.filter)
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   //Кастыль. MockApi не дает общеее количество items
   const totalItemsCount = 10
@@ -29,7 +35,7 @@ const Home = () => {
     dispatch(setCurrentPage(pageNumber))
   }
 
-  useEffect(() => {
+  const fetchPizzas = () => {
     setIsLoading(true)
     const search = searchValue ? `&title=${searchValue}` : ''
     const category = search ? '' : categoryId > 0 ? `category=${categoryId}` : ''
@@ -45,11 +51,53 @@ const Home = () => {
       })
       .catch(() => console.warn(`Some problems with mockAPI, please reload the page`))
       .finally(() => setIsLoading(false))
-    window.scrollTo(0, 0)
-  }, [sortType, categoryId, searchValue, currentPage, pageSize])
+  }
 
   const skeletons = [...new Array(6)].map((_, index) => <SkeletonPizzaBlock key={index} />)
   const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1))
+
+      const sortType = sortList.find((obj) => obj.sortProperty === params.sortProperty)
+
+      dispatch(
+        setFilters({
+          ...params,
+          sortType,
+        })
+      )
+      isSearch.current = true
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify(
+        {
+          sortProperty: sortType.sortProperty,
+          categoryId,
+          currentPage,
+        },
+        {addQueryPrefix: true}
+      )
+      navigate(queryString)
+    }
+
+    isMounted.current = true
+  }, [sortType, categoryId, currentPage, navigate])
+
+  useEffect(() => {
+    if (!isSearch.current) {
+      fetchPizzas()
+    }
+
+    isSearch.current = false
+
+    window.scrollTo(0, 0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortType, categoryId, searchValue, currentPage, pageSize])
 
   return (
     <div className='container'>
