@@ -24,7 +24,8 @@ body {
 .content {
   padding: 40px 0;
 
-  &__error-info {
+  &__error-info,
+  &__not-found {
     margin: 150px auto;
     max-width: 500px;
 
@@ -45,6 +46,10 @@ body {
       font-size: 24px;
       font-weight: 400;
     }
+  }
+
+  &__not-found {
+    max-width: 700px;
   }
 
   &__title {

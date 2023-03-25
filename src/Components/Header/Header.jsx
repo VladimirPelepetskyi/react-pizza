@@ -4,7 +4,7 @@ import logoSvg from '../../assets/img/pizza-logo.svg'
 import {cartSelector} from '../../redux/slices/cartSlice'
 import Search from '../Search/Search'
 
-const Header = () => {
+const Header = ({withSearch}) => {
   const {items, totalPrice} = useSelector(cartSelector)
   const totalCount = items.reduce((sum, obj) => sum + obj.count, 0)
 
@@ -20,7 +20,7 @@ const Header = () => {
             </div>
           </div>
         </Link>
-        <Search />
+        {withSearch && <Search />}
         <div className='header__cart'>
           <Link to='/cart' className='button button--cart'>
             <span>{totalPrice} ₴</span>

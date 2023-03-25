@@ -1,4 +1,4 @@
-const PizzaEmptyBlock = () => {
+const PizzasErrorBlock = () => {
   return (
     <div className='content__error-info'>
       <h1>
@@ -13,4 +13,4 @@ const PizzaEmptyBlock = () => {
   )
 }
 
-export default PizzaEmptyBlock
+export default PizzasErrorBlock

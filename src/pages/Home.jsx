@@ -6,7 +6,7 @@ import Categories from '../Components/Categories/Categories'
 import Pagination from '../Components/Pagination/Pagination'
 import PizzaBlock from '../Components/PizzaBlock/PizzaBlock'
 import SkeletonPizzaBlock from '../Components/PizzaBlock/SkeletonPizzaBlock'
-import PizzaEmptyBlock from '../Components/PizzaEmptyBlock/PizzaEmptyBlock'
+import PizzasErrorBlock from '../Components/PizzasErrorBlock/PizzasErrorBlock'
 import Sort, {sortList} from '../Components/Sort/Sort'
 import {
   selectFilter,
@@ -16,6 +16,7 @@ import {
   setFilters,
 } from '../redux/slices/filterSlice'
 import {fetchPizzas, selectPizzaData} from '../redux/slices/pizzaSlice'
+import PizzasNotFoundBlock from '../Components/PizzasNotFoundBlock/PizzasNotFoundBlock'
 
 const Home = () => {
   const searchValue = useSelector(selectSearchValue)
@@ -103,7 +104,9 @@ const Home = () => {
         <Sort />
       </div>
       {status === 'error' ? (
-        <PizzaEmptyBlock />
+        <PizzasErrorBlock />
+      ) : items.length === 0 && status === 'success' ? (
+        <PizzasNotFoundBlock />
       ) : (
         <>
           <h2 className='content__title'>Все пиццы</h2>
