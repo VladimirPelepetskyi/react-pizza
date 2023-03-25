@@ -1,21 +1,25 @@
 import qs from 'qs'
-import {useContext, useEffect, useRef} from 'react'
+import {useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {SearchContext} from '../App'
 import Categories from '../Components/Categories/Categories'
 import Pagination from '../Components/Pagination/Pagination'
 import PizzaBlock from '../Components/PizzaBlock/PizzaBlock'
 import SkeletonPizzaBlock from '../Components/PizzaBlock/SkeletonPizzaBlock'
 import PizzaEmptyBlock from '../Components/PizzaEmptyBlock/PizzaEmptyBlock'
 import Sort, {sortList} from '../Components/Sort/Sort'
-import {selectFilter, setCategoryId, setCurrentPage, setFilters} from '../redux/slices/filterSlice'
-import {fetchPizzas} from '../redux/slices/pizzaSlice'
-import {selectPizza} from '../redux/slices/pizzaSlice'
+import {
+  selectFilter,
+  selectSearchValue,
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from '../redux/slices/filterSlice'
+import {fetchPizzas, selectPizzaData} from '../redux/slices/pizzaSlice'
 
 const Home = () => {
-  const {searchValue} = useContext(SearchContext)
-  const {items, status} = useSelector(selectPizza)
+  const searchValue = useSelector(selectSearchValue)
+  const {items, status} = useSelector(selectPizzaData)
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 

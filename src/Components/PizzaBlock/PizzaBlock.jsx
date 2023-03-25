@@ -1,8 +1,6 @@
-import {nanoid} from 'nanoid'
 import {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItem} from '../../redux/slices/cartSlice'
-import {cartSelector} from '../../redux/slices/cartSlice.js'
+import {addItem, selectCartItemById} from '../../redux/slices/cartSlice'
 
 const typesName = ['тонкое', 'традиционное']
 
@@ -11,7 +9,7 @@ const PizzaBlock = ({id, title, imageUrl, price, types, sizes}) => {
   const [activeTypeIndex, setActiveTypeIndex] = useState(0)
   const dispatch = useDispatch()
 
-  const cartItem = useSelector((state) => state.cart.items.find((item) => item.id === id))
+  const cartItem = useSelector(selectCartItemById(id))
   const addedCount = cartItem ? cartItem.count : 0
 
   const onAddItem = () => {
