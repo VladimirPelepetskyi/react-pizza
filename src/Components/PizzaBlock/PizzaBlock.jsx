@@ -2,28 +2,21 @@ import {nanoid} from 'nanoid'
 import {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {addItem} from '../../redux/slices/cartSlice'
+import {cartSelector} from '../../redux/slices/cartSlice.js'
 
 const typesName = ['тонкое', 'традиционное']
 
-const PizzaBlock = ({title, imageUrl, price, types, sizes}) => {
+const PizzaBlock = ({id, title, imageUrl, price, types, sizes}) => {
   const [activeSizeIndex, setActiveSizeIndex] = useState(0)
   const [activeTypeIndex, setActiveTypeIndex] = useState(0)
   const dispatch = useDispatch()
 
-  const cartItem = useSelector((state) =>
-    state.cart.items.find((item) => {
-      return (
-        item.title === title &&
-        item.type === typesName[activeTypeIndex] &&
-        item.size === sizes[activeSizeIndex]
-      )
-    })
-  )
+  const cartItem = useSelector((state) => state.cart.items.find((item) => item.id === id))
   const addedCount = cartItem ? cartItem.count : 0
 
   const onAddItem = () => {
     const item = {
-      id: nanoid(),
+      id,
       title,
       imageUrl,
       price,

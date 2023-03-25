@@ -1,6 +1,5 @@
-import axios from 'axios'
 import qs from 'qs'
-import {useContext, useEffect, useRef, useState} from 'react'
+import {useContext, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {SearchContext} from '../App'
@@ -8,17 +7,19 @@ import Categories from '../Components/Categories/Categories'
 import Pagination from '../Components/Pagination/Pagination'
 import PizzaBlock from '../Components/PizzaBlock/PizzaBlock'
 import SkeletonPizzaBlock from '../Components/PizzaBlock/SkeletonPizzaBlock'
+import PizzaEmptyBlock from '../Components/PizzaEmptyBlock/PizzaEmptyBlock'
 import Sort, {sortList} from '../Components/Sort/Sort'
-import {setCategoryId, setCurrentPage, setFilters} from '../redux/slices/filterSlice'
+import {selectFilter, setCategoryId, setCurrentPage, setFilters} from '../redux/slices/filterSlice'
+import {fetchPizzas} from '../redux/slices/pizzaSlice'
+import {selectPizza} from '../redux/slices/pizzaSlice'
 
 const Home = () => {
   const {searchValue} = useContext(SearchContext)
-  const [items, setItems] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const {items, status} = useSelector(selectPizza)
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 
-  const {categoryId, sortType, currentPage, pageSize} = useSelector((state) => state.filter)
+  const {categoryId, sortType, currentPage, pageSize} = useSelector(selectFilter)
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
@@ -35,22 +36,15 @@ const Home = () => {
     dispatch(setCurrentPage(pageNumber))
   }
 
-  const fetchPizzas = () => {
-    setIsLoading(true)
+  const getPizzas = async () => {
     const search = searchValue ? `&title=${searchValue}` : ''
     const category = search ? '' : categoryId > 0 ? `category=${categoryId}` : ''
     const sortBy = sortType.sortProperty.replace('-', '')
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
 
-    axios
-      .get(
-        `https://6416d3ce47092b8b6135b890.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}&page=${currentPage}&limit=${pageSize}`
-      )
-      .then((res) => {
-        setItems(res.data)
-      })
-      .catch(() => console.warn(`Some problems with mockAPI, please reload the page`))
-      .finally(() => setIsLoading(false))
+    dispatch(fetchPizzas({category, sortBy, order, search, currentPage, pageSize}))
+
+    // window.scrollTo(0, 0)
   }
 
   const skeletons = [...new Array(6)].map((_, index) => <SkeletonPizzaBlock key={index} />)
@@ -90,12 +84,11 @@ const Home = () => {
 
   useEffect(() => {
     if (!isSearch.current) {
-      fetchPizzas()
+      getPizzas()
     }
 
     isSearch.current = false
 
-    window.scrollTo(0, 0)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortType, categoryId, searchValue, currentPage, pageSize])
 
@@ -105,14 +98,20 @@ const Home = () => {
         <Categories value={categoryId} onClickCategory={onClickCategory} />
         <Sort />
       </div>
-      <h2 className='content__title'>Все пиццы</h2>
-      <div className='content__items'>{isLoading ? skeletons : pizzas}</div>
-      <Pagination
-        currentPage={currentPage}
-        onPageChanged={onClickPage}
-        pageSize={pageSize}
-        totalPageCount={totalPageCount}
-      />
+      {status === 'error' ? (
+        <PizzaEmptyBlock />
+      ) : (
+        <>
+          <h2 className='content__title'>Все пиццы</h2>
+          <div className='content__items'>{status === 'loadind' ? skeletons : pizzas}</div>
+          <Pagination
+            currentPage={currentPage}
+            onPageChanged={onClickPage}
+            pageSize={pageSize}
+            totalPageCount={totalPageCount}
+          />
+        </>
+      )}
     </div>
   )
 }

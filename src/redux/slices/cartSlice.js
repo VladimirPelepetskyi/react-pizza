@@ -10,7 +10,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      const findItem = state.items.find((obj) => obj.title === action.payload.title)
+      const findItem = state.items.find((obj) => obj.id === action.payload.id)
 
       if (findItem) {
         findItem.count++
@@ -21,8 +21,15 @@ export const cartSlice = createSlice({
       state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
     },
 
+    minusItem: (state, action) => {
+      const findItem = state.items.find((obj) => obj.id === action.payload)
+      if (findItem && findItem.count > 1) {
+        findItem.count--
+      }
+    },
+
     removeItem: (state, action) => {
-      state.items = state.items.filter((obj) => obj.title !== action.payload.title)
+      state.items = state.items.filter((obj) => obj.id !== action.payload)
 
       state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
     },
@@ -31,29 +38,11 @@ export const cartSlice = createSlice({
       state.items = []
       state.totalPrice = 0
     },
-
-    plusCartItemCount: (state, action) => {
-      // eslint-disable-next-line array-callback-return
-      state.items.map((item) => {
-        if (item.id === action.payload) {
-          return item.count++
-        }
-      })
-    },
-    minusCartItemCount: (state, action) => {
-      // eslint-disable-next-line array-callback-return
-      state.items.map((item) => {
-        if (item.id === action.payload) {
-          item.count--
-        }
-      })
-    },
   },
 })
 
-export const {addItem, removeItem, clearItems, plusCartItemCount, minusCartItemCount} = cartSlice.actions
+export const cartSelector = (state) => state.cart
+
+export const {addItem, removeItem, clearItems, minusItem} = cartSlice.actions
 
 export default cartSlice.reducer
-
-// console.log('slice', cartSlice)
-// window.cartSlice = cartSlice

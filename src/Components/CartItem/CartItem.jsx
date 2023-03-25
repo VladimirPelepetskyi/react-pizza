@@ -1,19 +1,19 @@
 import {useDispatch} from 'react-redux'
-import {plusCartItemCount, removeItem, minusCartItemCount} from '../../redux/slices/cartSlice'
+import {addItem, removeItem, minusItem} from '../../redux/slices/cartSlice'
 
 const CartItem = ({id, title, imageUrl, price, type, size, count}) => {
   const dispatch = useDispatch()
 
-  const onMinusCartItem = (cartId) => {
-    dispatch(minusCartItemCount(cartId))
+  const onMinusCartItem = (id) => {
+    dispatch(minusItem(id))
   }
 
-  const onPlusCartItem = (cartId) => {
-    dispatch(plusCartItemCount(cartId))
+  const onPlusCartItem = (id) => {
+    dispatch(addItem({id}))
   }
 
-  const onRemoveItem = (itemId, itemType, itemSize) => {
-    dispatch(removeItem({itemId, itemType, itemSize, title}))
+  const onRemoveCartItem = (itemId) => {
+    dispatch(removeItem(itemId))
   }
 
   return (
@@ -65,7 +65,7 @@ const CartItem = ({id, title, imageUrl, price, type, size, count}) => {
       </div>
       <div className='cart__item-remove'>
         <div
-          onClick={() => onRemoveItem(id, type, size, title)}
+          onClick={() => onRemoveCartItem(id, type, size, title)}
           className='button button--outline button--circle'
         >
           <svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'>
