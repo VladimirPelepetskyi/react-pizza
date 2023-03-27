@@ -1,7 +1,7 @@
 import qs from 'qs'
 import {useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import Categories from '../Components/Categories/Categories'
 import Pagination from '../Components/Pagination/Pagination'
 import PizzaBlock from '../Components/PizzaBlock/PizzaBlock'

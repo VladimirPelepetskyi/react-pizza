@@ -2,15 +2,15 @@ import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import PizzasErrorBlock from '../Components/PizzasErrorBlock/PizzasErrorBlock'
-import {fetchPizzaItem, selectPizzaItemData} from '../redux/slices/pizzaItemSlice'
+import {fetchFullPizza, selectFullPizzaData} from '../redux/slices/fullPizzaSlice'
 
-const PizzaItem = () => {
+const FullPizza = () => {
   const dispatch = useDispatch()
   const {id} = useParams()
-  const {pizzaItem, status} = useSelector(selectPizzaItemData)
+  const {fullPizza, status} = useSelector(selectFullPizzaData)
 
   useEffect(() => {
-    dispatch(fetchPizzaItem(id))
+    dispatch(fetchFullPizza(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
@@ -21,8 +21,8 @@ const PizzaItem = () => {
       ) : (
         <>
           <div>
-            <img src={pizzaItem.imageUrl} alt={pizzaItem.title} />
-            <h1>{pizzaItem.title}</h1>
+            <img src={fullPizza.imageUrl} alt={fullPizza.title} />
+            <h1>{fullPizza.title}</h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, esse quia expedita labore
               libero ducimus temporibus enim exercitationem nihil voluptas, eos aut dicta corporis explicabo
@@ -35,4 +35,4 @@ const PizzaItem = () => {
   )
 }
 
-export default PizzaItem
+export default FullPizza
