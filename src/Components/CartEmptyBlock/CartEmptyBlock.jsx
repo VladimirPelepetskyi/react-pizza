@@ -6,7 +6,7 @@ const CartEmptyBlock = () => {
     <div className='container container--cart'>
       <div className='cart cart--empty'>
         <h2>
-          Корзина пустая <icon>😕</icon>
+          Корзина пустая 😕
         </h2>
         <p>
           Вероятней всего, вы не заказывали ещё пиццу.

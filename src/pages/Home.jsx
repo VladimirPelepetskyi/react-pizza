@@ -1,12 +1,13 @@
 import qs from 'qs'
 import {useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Categories from '../Components/Categories/Categories'
 import Pagination from '../Components/Pagination/Pagination'
 import PizzaBlock from '../Components/PizzaBlock/PizzaBlock'
 import SkeletonPizzaBlock from '../Components/PizzaBlock/SkeletonPizzaBlock'
 import PizzasErrorBlock from '../Components/PizzasErrorBlock/PizzasErrorBlock'
+import PizzasNotFoundBlock from '../Components/PizzasNotFoundBlock/PizzasNotFoundBlock'
 import Sort, {sortList} from '../Components/Sort/Sort'
 import {
   selectFilter,
@@ -16,7 +17,6 @@ import {
   setFilters,
 } from '../redux/slices/filterSlice'
 import {fetchPizzas, selectPizzaData} from '../redux/slices/pizzaSlice'
-import PizzasNotFoundBlock from '../Components/PizzasNotFoundBlock/PizzasNotFoundBlock'
 
 const Home = () => {
   const searchValue = useSelector(selectSearchValue)
