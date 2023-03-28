@@ -1,13 +1,12 @@
-import {Link} from 'react-router-dom'
-import emptyCart from '../../assets/img/empty-cart.png'
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import emptyCart from '../../assets/img/empty-cart.png';
 
-const CartEmptyBlock = () => {
+const CartEmptyBlock: FC = () => {
   return (
     <div className='container container--cart'>
       <div className='cart cart--empty'>
-        <h2>
-          Корзина пустая 😕
-        </h2>
+        <h2>Корзина пустая 😕</h2>
         <p>
           Вероятней всего, вы не заказывали ещё пиццу.
           <br />
@@ -19,7 +18,7 @@ const CartEmptyBlock = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CartEmptyBlock
+export default CartEmptyBlock;

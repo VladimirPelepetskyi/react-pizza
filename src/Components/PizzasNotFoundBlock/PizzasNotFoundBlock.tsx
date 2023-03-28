@@ -1,4 +1,6 @@
-const PizzasNotFoundBlock = () => {
+import { FC } from 'react';
+
+const PizzasNotFoundBlock: FC = () => {
   return (
     <div className='content__not-found'>
       <h1>Упс, нет таких пиццек 😞</h1>
@@ -8,7 +10,7 @@ const PizzasNotFoundBlock = () => {
         Попробуйте, пожалуйста, изменить параметры поиска.
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default PizzasNotFoundBlock
+export default PizzasNotFoundBlock;

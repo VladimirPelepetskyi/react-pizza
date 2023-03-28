@@ -1,11 +1,11 @@
-import {useState} from 'react'
+import {FC, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItem, selectCartItemById} from '../../redux/slices/cartSlice'
 import {Link} from 'react-router-dom'
+import {addItem, selectCartItemById} from '../../redux/slices/cartSlice'
 
 const typesName = ['тонкое', 'традиционное']
 
-const PizzaBlock = ({id, title, imageUrl, price, types, sizes}) => {
+const PizzaBlock: FC<TPizzaBlockProps> = ({id, title, imageUrl, price, types, sizes}) => {
   const [activeSizeIndex, setActiveSizeIndex] = useState(0)
   const [activeTypeIndex, setActiveTypeIndex] = useState(0)
   const dispatch = useDispatch()
@@ -75,3 +75,13 @@ const PizzaBlock = ({id, title, imageUrl, price, types, sizes}) => {
 }
 
 export default PizzaBlock
+
+//types
+type TPizzaBlockProps = {
+  id: string
+  title: string
+  imageUrl: string
+  price: number
+  types: number[]
+  sizes: number[]
+}

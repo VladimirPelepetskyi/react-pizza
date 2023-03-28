@@ -1,7 +1,7 @@
-import React from 'react'
-import ContentLoader from 'react-content-loader'
+import { FC } from 'react';
+import ContentLoader from 'react-content-loader';
 
-const SkeletonPizzaBlock = () => (
+const SkeletonPizzaBlock: FC = () => (
   <ContentLoader
     className='pizza-block'
     speed={2}
@@ -18,6 +18,6 @@ const SkeletonPizzaBlock = () => (
     <circle cx='140' cy='140' r='130' />
     <rect x='1' y='320' rx='10' ry='10' width='280' height='80' />
   </ContentLoader>
-)
+);
 
-export default SkeletonPizzaBlock
+export default SkeletonPizzaBlock;

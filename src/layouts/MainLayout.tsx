@@ -1,7 +1,8 @@
+import {FC} from 'react'
 import {Outlet, useLocation} from 'react-router-dom'
 import Header from '../Components/Header/Header'
 
-const MainLayout = () => {
+const MainLayout: FC = () => {
   const location = useLocation()
   const isMainPage = location.pathname === '/'
 

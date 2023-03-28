@@ -1,12 +1,16 @@
-import {useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
-import logoSvg from '../../assets/img/pizza-logo.svg'
-import {cartSelector} from '../../redux/slices/cartSlice'
-import Search from '../Search/Search'
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import logoSvg from '../../assets/img/pizza-logo.svg';
+import { cartSelector } from '../../redux/slices/cartSlice';
+import Search from '../Search/Search';
 
-const Header = ({withSearch}) => {
-  const {items, totalPrice} = useSelector(cartSelector)
-  const totalCount = items.reduce((sum, obj) => sum + obj.count, 0)
+const Header: FC<TProps> = ({ withSearch }) => {
+  const { items, totalPrice } = useSelector(cartSelector);
+  const totalCount = items.reduce(
+    (sum: number, obj: any) => sum + obj.count,
+    0
+  );
 
   return (
     <div className='header'>
@@ -25,7 +29,13 @@ const Header = ({withSearch}) => {
           <Link to='/cart' className='button button--cart'>
             <span>{totalPrice} ₴</span>
             <div className='button__delimiter'></div>
-            <svg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <svg
+              width='18'
+              height='18'
+              viewBox='0 0 18 18'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <path
                 d='M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z'
                 stroke='white'
@@ -53,7 +63,13 @@ const Header = ({withSearch}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
+
+//types
+
+type TProps = {
+  withSearch: boolean;
+};
