@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce'
-import {FC, useCallback, useRef, useState} from 'react'
+import {ChangeEventHandler, FC, MouseEventHandler, useCallback, useRef, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {setSearchValue} from '../../redux/slices/filterSlice.js'
 import styles from './Search.module.scss'
@@ -17,12 +17,12 @@ const Search: FC = () => {
     []
   )
 
-  const onChangeInput = (evt: any) => {
+  const onChangeInput: ChangeEventHandler<HTMLInputElement> = (evt) => {
     setValue(evt.currentTarget.value)
     updateSearchValue(evt.currentTarget.value)
   }
 
-  const onClickClear = () => {
+  const onClickClear: MouseEventHandler<SVGSVGElement> = () => {
     setValue('')
     dispatch(setSearchValue(''))
     inputRef.current?.focus()

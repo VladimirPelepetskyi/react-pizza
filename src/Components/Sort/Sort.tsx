@@ -1,38 +1,38 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter, setSortType } from '../../redux/slices/filterSlice';
+import {useEffect, useRef, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {selectFilter, setSortType} from '../../redux/slices/filterSlice'
 
 export const sortList: TSortItem[] = [
-  { name: 'популярности  ↑', sortProperty: 'rating' },
-  { name: 'популярности ↓', sortProperty: '-rating' },
-  { name: 'цене ↑', sortProperty: 'price' },
-  { name: 'цене ↓', sortProperty: '-price' },
-  { name: 'алфавиту ↑', sortProperty: 'title' },
-  { name: 'алфавиту ↓', sortProperty: '-title' },
-];
+  {name: 'популярности  ↑', sortProperty: 'rating'},
+  {name: 'популярности ↓', sortProperty: '-rating'},
+  {name: 'цене ↑', sortProperty: 'price'},
+  {name: 'цене ↓', sortProperty: '-price'},
+  {name: 'алфавиту ↑', sortProperty: 'title'},
+  {name: 'алфавиту ↓', sortProperty: '-title'},
+]
 
 const Sort = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { sortType } = useSelector(selectFilter);
-  const dispatch = useDispatch();
-  const sortRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false)
+  const {sortType} = useSelector(selectFilter)
+  const dispatch = useDispatch()
+  const sortRef = useRef<HTMLDivElement>(null)
 
   const onClickListItem = (obj: TSortItem) => {
-    dispatch(setSortType(obj));
-    setIsOpen(false);
-  };
+    dispatch(setSortType(obj))
+    setIsOpen(false)
+  }
 
-  const handleClickOutside = (evt: any) => {
-    const path = evt.composedPath();
-    if (!path.includes(sortRef.current)) {
-      setIsOpen(false);
+  const handleClickOutside = (evt: MouseEvent) => {
+    const path = evt.composedPath()
+    if (sortRef.current && !path.includes(sortRef.current)) {
+      setIsOpen(false)
     }
-  };
+  }
 
   useEffect(() => {
-    document.body.addEventListener('click', handleClickOutside);
-    return () => document.body.removeEventListener('click', handleClickOutside);
-  }, []);
+    document.body.addEventListener('click', handleClickOutside)
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, [])
 
   return (
     <div ref={sortRef} className='sort'>
@@ -59,9 +59,7 @@ const Sort = () => {
             {sortList.map((obj, index) => (
               <li
                 key={index}
-                className={
-                  sortType.sortProperty === obj.sortProperty ? 'active' : ''
-                }
+                className={sortType.sortProperty === obj.sortProperty ? 'active' : ''}
                 onClick={() => onClickListItem(obj)}
               >
                 {obj.name}
@@ -71,14 +69,14 @@ const Sort = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Sort;
+export default Sort
 
 //types
 
 type TSortItem = {
-  name: string;
-  sortProperty: string;
-};
+  name: string
+  sortProperty: string
+}
