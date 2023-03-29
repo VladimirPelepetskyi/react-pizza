@@ -1,17 +1,20 @@
-import {useEffect} from 'react'
+import {FC, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import PizzasErrorBlock from '../Components/PizzasErrorBlock/PizzasErrorBlock'
 import {fetchFullPizza} from '../redux/fullPizza/asyncActions'
 import {selectFullPizzaData} from '../redux/fullPizza/selectors'
+import {AppDispatch} from '../redux/store'
 
-const FullPizza = () => {
-  const dispatch = useDispatch()
+const FullPizza: FC = () => {
+  const dispatch: AppDispatch = useDispatch()
   const {id} = useParams()
   const {fullPizza, status} = useSelector(selectFullPizzaData)
 
   useEffect(() => {
-    dispatch(fetchFullPizza(id))
+    if (id) {
+      dispatch(fetchFullPizza(id))
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 

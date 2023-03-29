@@ -11,8 +11,10 @@ import PizzasNotFoundBlock from '../Components/PizzasNotFoundBlock/PizzasNotFoun
 import Sort, {sortList} from '../Components/Sort/Sort'
 import {setCategoryId, setCurrentPage, setFilters} from '../redux/filter/filterSlice'
 import {selectFilter, selectSearchValue} from '../redux/filter/selectors'
+import {TFilters} from '../redux/filter/types'
 import {fetchPizzas} from '../redux/pizza/asyncActions'
 import {selectPizzaData} from '../redux/pizza/selectors'
+import {AppDispatch} from '../redux/store'
 
 const Home = () => {
   const searchValue = useSelector(selectSearchValue)
@@ -21,7 +23,7 @@ const Home = () => {
   const isMounted = useRef(false)
 
   const {categoryId, sortType, currentPage, pageSize} = useSelector(selectFilter)
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   const navigate = useNavigate()
 
@@ -29,11 +31,11 @@ const Home = () => {
   const totalItemsCount = 10
   const totalPageCount = Math.ceil(totalItemsCount / pageSize)
 
-  const onClickCategory = (categoryId) => {
+  const onClickCategory = (categoryId: number) => {
     dispatch(setCategoryId(categoryId))
   }
 
-  const onClickPage = (pageNumber) => {
+  const onClickPage = (pageNumber: number) => {
     dispatch(setCurrentPage(pageNumber))
   }
 
@@ -61,11 +63,12 @@ const Home = () => {
         setFilters({
           ...params,
           sortType,
-        })
+        } as TFilters)
       )
+
       isSearch.current = true
     }
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     if (isMounted.current) {

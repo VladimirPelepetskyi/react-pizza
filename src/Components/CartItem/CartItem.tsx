@@ -12,8 +12,7 @@ const CartItem: FC<TCartItemProps> = ({id, title, imageUrl, price, type, size, c
   }
 
   const onPlusCartItem = (id: string) => {
-    //@ts-ignore
-    dispatch(addItem({id}))
+    dispatch(addItem({id} as any))
   }
 
   const onRemoveCartItem = (itemId: string) => {
