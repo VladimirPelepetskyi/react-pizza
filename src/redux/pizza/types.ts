@@ -1,11 +1,12 @@
-import {TPizzaItem, TStatusLoading} from '../types'
+import {TPizzaItem} from '../types'
+import {EStatus} from './../types'
 
 export interface IPizzaState {
   items: TPizzaItem[]
-  status: TStatusLoading
+  status: EStatus
 }
 
-export type TFetchPizzas = {
+export type TFetchPizzasArgs = {
   category: string
   sortBy: string
   order: string

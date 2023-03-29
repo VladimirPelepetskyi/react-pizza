@@ -222,6 +222,17 @@ body {
             display: none;
           }
         }
+
+        &:disabled {
+          opacity: 0.4;
+          border-color: #4f4e4e;
+
+          pointer-events: none;
+
+          svg path {
+            fill: #4f4e4e;
+          }
+        }
       }
 
       b {

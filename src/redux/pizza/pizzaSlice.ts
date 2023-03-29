@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {TPizzaItem} from '../types'
+import {EStatus, TPizzaItem} from '../types'
 import {fetchPizzas} from './asyncActions'
 import {IPizzaState} from './types'
 
 const initialState: IPizzaState = {
   items: [],
-  status: 'loadind',
+  status: EStatus.LOADING,
 }
 
 export const pizzaSlice = createSlice({
@@ -14,15 +14,15 @@ export const pizzaSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchPizzas.pending, (state) => {
-      state.status = 'loadind'
+      state.status = EStatus.LOADING
       state.items = []
     })
     builder.addCase(fetchPizzas.fulfilled, (state, action: PayloadAction<TPizzaItem[]>) => {
       state.items = action.payload
-      state.status = 'success'
+      state.status = EStatus.SUCCESS
     })
     builder.addCase(fetchPizzas.rejected, (state) => {
-      state.status = 'error'
+      state.status = EStatus.ERROR
       state.items = []
     })
   },

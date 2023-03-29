@@ -10,7 +10,7 @@ const Pagination: FC<TPaginationProps> = ({currentPage, onPageChanged, pageSize,
       previousLabel='<'
       nextLabel='>'
       onPageChange={(evt) => onPageChanged(evt.selected + 1)}
-      initialPage={currentPage - 1}
+      forcePage={currentPage - 1}
       pageRangeDisplayed={pageSize}
       pageCount={totalPageCount}
       disabledClassName={'hidePrevNext'}

@@ -1,4 +1,8 @@
-export type TStatusLoading = 'loadind' | 'success' | 'error'
+export enum EStatus {
+  LOADING = 'loadind',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
 
 export type TPizzaItem = {
   id: string
