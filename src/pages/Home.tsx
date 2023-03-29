@@ -1,5 +1,5 @@
 import qs from 'qs'
-import {useEffect, useRef} from 'react'
+import {useCallback, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import Categories from '../Components/Categories/Categories'
@@ -31,9 +31,9 @@ const Home = () => {
   const totalItemsCount = 10
   const totalPageCount = Math.ceil(totalItemsCount / pageSize)
 
-  const onClickCategory = (categoryId: number) => {
+  const onClickCategory = useCallback((categoryId: number) => {
     dispatch(setCategoryId(categoryId))
-  }
+  }, [])
 
   const onClickPage = (pageNumber: number) => {
     dispatch(setCurrentPage(pageNumber))
@@ -100,7 +100,7 @@ const Home = () => {
     <div className='container'>
       <div className='content__top'>
         <Categories value={categoryId} onClickCategory={onClickCategory} />
-        <Sort />
+        <Sort sortType={sortType} />
       </div>
       {status === 'error' ? (
         <PizzasErrorBlock />

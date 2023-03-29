@@ -1,7 +1,6 @@
-import {useEffect, useRef, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React, {FC, useEffect, useRef, useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {setSortType} from '../../redux/filter/filterSlice'
-import {selectFilter} from '../../redux/filter/selectors'
 import {TSort} from '../../redux/filter/types'
 import {AppDispatch} from '../../redux/store'
 
@@ -14,9 +13,9 @@ export const sortList: TSort[] = [
   {name: 'алфавиту ↓', sortProperty: '-title'},
 ]
 
-const Sort = () => {
+const Sort: FC<TSortProps> = React.memo(({sortType}) => {
+  console.log(42)
   const [isOpen, setIsOpen] = useState(false)
-  const {sortType} = useSelector(selectFilter)
   const dispatch: AppDispatch = useDispatch()
   const sortRef = useRef<HTMLDivElement>(null)
 
@@ -73,6 +72,12 @@ const Sort = () => {
       )}
     </div>
   )
-}
+})
 
 export default Sort
+
+//types
+
+type TSortProps = {
+  sortType: TSort
+}
