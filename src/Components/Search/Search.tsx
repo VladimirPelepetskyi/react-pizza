@@ -2,12 +2,13 @@ import debounce from 'lodash.debounce'
 import {ChangeEventHandler, FC, MouseEventHandler, useCallback, useRef, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {setSearchValue} from '../../redux/filter/filterSlice'
+import {AppDispatch} from '../../redux/store'
 import styles from './Search.module.scss'
 
 const Search: FC = () => {
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = useCallback(

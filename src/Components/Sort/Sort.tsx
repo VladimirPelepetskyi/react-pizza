@@ -2,8 +2,10 @@ import {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {setSortType} from '../../redux/filter/filterSlice'
 import {selectFilter} from '../../redux/filter/selectors'
+import {TSort} from '../../redux/filter/types'
+import {AppDispatch} from '../../redux/store'
 
-export const sortList: TSortItem[] = [
+export const sortList: TSort[] = [
   {name: 'популярности  ↑', sortProperty: 'rating'},
   {name: 'популярности ↓', sortProperty: '-rating'},
   {name: 'цене ↑', sortProperty: 'price'},
@@ -15,10 +17,10 @@ export const sortList: TSortItem[] = [
 const Sort = () => {
   const [isOpen, setIsOpen] = useState(false)
   const {sortType} = useSelector(selectFilter)
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const sortRef = useRef<HTMLDivElement>(null)
 
-  const onClickListItem = (obj: TSortItem) => {
+  const onClickListItem = (obj: TSort) => {
     dispatch(setSortType(obj))
     setIsOpen(false)
   }
@@ -74,10 +76,3 @@ const Sort = () => {
 }
 
 export default Sort
-
-//types
-
-type TSortItem = {
-  name: string
-  sortProperty: string
-}

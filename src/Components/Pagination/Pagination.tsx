@@ -1,20 +1,8 @@
-import { FC } from 'react';
-import ReactPaginate from 'react-paginate';
-import styles from './Pagination.module.scss';
+import {FC} from 'react'
+import ReactPaginate from 'react-paginate'
+import styles from './Pagination.module.scss'
 
-type TPaginationProps = {
-  currentPage: number;
-  onPageChanged: (selectedPage: number) => void;
-  pageSize: number;
-  totalPageCount: number;
-};
-
-const Pagination: FC<TPaginationProps> = ({
-  currentPage,
-  onPageChanged,
-  pageSize,
-  totalPageCount,
-}) => {
+const Pagination: FC<TPaginationProps> = ({currentPage, onPageChanged, pageSize, totalPageCount}) => {
   return (
     <ReactPaginate
       className={styles.root}
@@ -27,7 +15,16 @@ const Pagination: FC<TPaginationProps> = ({
       pageCount={totalPageCount}
       disabledClassName={'hidePrevNext'}
     />
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination
+
+//types
+
+type TPaginationProps = {
+  currentPage: number
+  onPageChanged: (selectedPage: number) => void
+  pageSize: number
+  totalPageCount: number
+}

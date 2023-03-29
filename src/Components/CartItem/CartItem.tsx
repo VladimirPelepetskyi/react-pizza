@@ -1,9 +1,11 @@
 import {FC} from 'react'
 import {useDispatch} from 'react-redux'
 import {addItem, minusItem, removeItem} from '../../redux/cart/cartSlice'
+import {TCartItem} from '../../redux/cart/types'
+import {AppDispatch} from '../../redux/store'
 
 const CartItem: FC<TCartItemProps> = ({id, title, imageUrl, price, type, size, count}) => {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   const onMinusCartItem = (id: string) => {
     dispatch(minusItem(id))
@@ -87,12 +89,4 @@ export default CartItem
 
 //types
 
-type TCartItemProps = {
-  id: string
-  title: string
-  imageUrl: string
-  price: number
-  type: string
-  size: number
-  count: number
-}
+type TCartItemProps = TCartItem
