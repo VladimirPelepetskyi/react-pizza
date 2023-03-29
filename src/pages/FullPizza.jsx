@@ -2,7 +2,8 @@ import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import PizzasErrorBlock from '../Components/PizzasErrorBlock/PizzasErrorBlock'
-import {fetchFullPizza, selectFullPizzaData} from '../redux/slices/fullPizzaSlice'
+import {fetchFullPizza} from '../redux/fullPizza/asyncActions'
+import {selectFullPizzaData} from '../redux/fullPizza/selectors'
 
 const FullPizza = () => {
   const dispatch = useDispatch()

@@ -1,7 +1,7 @@
 import debounce from 'lodash.debounce'
 import {ChangeEventHandler, FC, MouseEventHandler, useCallback, useRef, useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {setSearchValue} from '../../redux/slices/filterSlice.js'
+import {setSearchValue} from '../../redux/filter/filterSlice'
 import styles from './Search.module.scss'
 
 const Search: FC = () => {

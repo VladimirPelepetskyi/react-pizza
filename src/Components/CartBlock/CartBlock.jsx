@@ -1,8 +1,8 @@
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {clearItems} from '../../redux/slices/cartSlice'
+import {clearItems} from '../../redux/cart/cartSlice'
+import {cartSelector} from '../../redux/cart/selectors'
 import CartItem from '../CartItem/CartItem'
-import {cartSelector} from '../../redux/slices/cartSlice'
 
 const CartBlock = () => {
   const {items: cartItems, totalPrice} = useSelector(cartSelector)

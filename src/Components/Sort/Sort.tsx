@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {selectFilter, setSortType} from '../../redux/slices/filterSlice'
+import {setSortType} from '../../redux/filter/filterSlice'
+import {selectFilter} from '../../redux/filter/selectors'
 
 export const sortList: TSortItem[] = [
   {name: 'популярности  ↑', sortProperty: 'rating'},

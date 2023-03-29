@@ -9,14 +9,10 @@ import SkeletonPizzaBlock from '../Components/PizzaBlock/SkeletonPizzaBlock'
 import PizzasErrorBlock from '../Components/PizzasErrorBlock/PizzasErrorBlock'
 import PizzasNotFoundBlock from '../Components/PizzasNotFoundBlock/PizzasNotFoundBlock'
 import Sort, {sortList} from '../Components/Sort/Sort'
-import {
-  selectFilter,
-  selectSearchValue,
-  setCategoryId,
-  setCurrentPage,
-  setFilters,
-} from '../redux/slices/filterSlice'
-import {fetchPizzas, selectPizzaData} from '../redux/slices/pizzaSlice'
+import {setCategoryId, setCurrentPage, setFilters} from '../redux/filter/filterSlice'
+import {selectFilter, selectSearchValue} from '../redux/filter/selectors'
+import {fetchPizzas} from '../redux/pizza/asyncActions'
+import {selectPizzaData} from '../redux/pizza/selectors'
 
 const Home = () => {
   const searchValue = useSelector(selectSearchValue)
