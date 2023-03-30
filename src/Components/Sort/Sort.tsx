@@ -14,7 +14,6 @@ export const sortList: TSort[] = [
 ]
 
 const Sort: FC<TSortProps> = React.memo(({sortType}) => {
-  console.log(42)
   const [isOpen, setIsOpen] = useState(false)
   const dispatch: AppDispatch = useDispatch()
   const sortRef = useRef<HTMLDivElement>(null)
