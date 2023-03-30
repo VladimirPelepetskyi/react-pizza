@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom'
 import {clearItems} from '../../redux/cart/cartSlice'
 import {cartSelector} from '../../redux/cart/selectors'
 import {AppDispatch} from '../../redux/store'
-import CartItem from '../CartItem/CartItem'
+import {CartItem} from '../../Components'
 
-const CartBlock: FC = () => {
+export const CartBlock: FC = () => {
   const {items: cartItems, totalPrice} = useSelector(cartSelector)
   const totalCount = cartItems.reduce((sum, obj) => sum + obj.count, 0)
   const dispatch: AppDispatch = useDispatch()
@@ -116,5 +116,3 @@ const CartBlock: FC = () => {
     </div>
   )
 }
-
-export default CartBlock

@@ -39,5 +39,9 @@
     &:focus {
       border: 1px solid rgba(0, 0, 0, 0.2);
     }
+
+    @media (max-width: 460px) {
+      width: 280px;
+    }
   }
 }

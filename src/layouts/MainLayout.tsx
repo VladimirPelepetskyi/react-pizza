@@ -1,6 +1,6 @@
 import {FC} from 'react'
 import {Outlet, useLocation} from 'react-router-dom'
-import Header from '../Components/Header/Header'
+import {Header} from '../Components'
 
 const MainLayout: FC = () => {
   const location = useLocation()

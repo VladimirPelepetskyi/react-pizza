@@ -3,9 +3,9 @@ import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import logoSvg from '../../assets/img/pizza-logo.svg'
 import {cartSelector} from '../../redux/cart/selectors'
-import Search from '../Search/Search'
+import {Search} from '../../Components'
 
-const Header: FC<TProps> = ({withSearch}) => {
+export const Header: FC<TProps> = ({withSearch}) => {
   const {items, totalPrice} = useSelector(cartSelector)
   const totalCount = items.reduce((sum: number, obj: any) => sum + obj.count, 0)
   const isMounted = useRef(false)
@@ -75,8 +75,6 @@ const Header: FC<TProps> = ({withSearch}) => {
     </div>
   )
 }
-
-export default Header
 
 //types
 

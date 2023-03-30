@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
-const Categories: FC<TCategoriesProps> = React.memo(({value, onClickCategory}) => {
+export const Categories: FC<TCategoriesProps> = React.memo(({value, onClickCategory}) => {
   return (
     <div className='categories'>
       <ul>
@@ -19,8 +19,6 @@ const Categories: FC<TCategoriesProps> = React.memo(({value, onClickCategory}) =
     </div>
   )
 })
-
-export default Categories
 
 //types
 

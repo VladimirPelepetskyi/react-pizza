@@ -8,7 +8,7 @@ import {AppDispatch} from '../../redux/store'
 
 const typesName = ['тонкое', 'традиционное']
 
-const PizzaBlock: FC<TPizzaBlockProps> = ({id, title, imageUrl, price, types, sizes}) => {
+export const PizzaBlock: FC<TPizzaBlockProps> = ({id, title, imageUrl, price, types, sizes}) => {
   const [activeSizeIndex, setActiveSizeIndex] = useState(0)
   const [activeTypeIndex, setActiveTypeIndex] = useState(0)
   const dispatch: AppDispatch = useDispatch()
@@ -76,8 +76,6 @@ const PizzaBlock: FC<TPizzaBlockProps> = ({id, title, imageUrl, price, types, si
     </div>
   )
 }
-
-export default PizzaBlock
 
 //types
 type TPizzaBlockProps = {

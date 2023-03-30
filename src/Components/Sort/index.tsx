@@ -13,7 +13,7 @@ export const sortList: TSort[] = [
   {name: 'алфавиту ↓', sortProperty: '-title'},
 ]
 
-const Sort: FC<TSortProps> = React.memo(({sortType}) => {
+export const Sort: FC<TSortProps> = React.memo(({sortType}) => {
   const [isOpen, setIsOpen] = useState(false)
   const dispatch: AppDispatch = useDispatch()
   const sortRef = useRef<HTMLDivElement>(null)
@@ -72,8 +72,6 @@ const Sort: FC<TSortProps> = React.memo(({sortType}) => {
     </div>
   )
 })
-
-export default Sort
 
 //types
 

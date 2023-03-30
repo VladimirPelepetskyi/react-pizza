@@ -1,7 +1,6 @@
 import {FC} from 'react'
 import {useSelector} from 'react-redux'
-import CartBlock from '../Components/CartBlock/CartBlock'
-import CartEmptyBlock from '../Components/CartEmptyBlock/CartEmptyBlock'
+import {CartBlock, CartEmptyBlock} from '../Components/'
 import {cartSelector} from '../redux/cart/selectors'
 
 const Cart: FC = () => {

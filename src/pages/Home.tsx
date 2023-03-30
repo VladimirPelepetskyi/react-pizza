@@ -2,13 +2,16 @@ import qs from 'qs'
 import {useCallback, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import Categories from '../Components/Categories/Categories'
-import Pagination from '../Components/Pagination/Pagination'
-import PizzaBlock from '../Components/PizzaBlock/PizzaBlock'
-import SkeletonPizzaBlock from '../Components/PizzaBlock/SkeletonPizzaBlock'
-import PizzasErrorBlock from '../Components/PizzasErrorBlock/PizzasErrorBlock'
-import PizzasNotFoundBlock from '../Components/PizzasNotFoundBlock/PizzasNotFoundBlock'
-import Sort, {sortList} from '../Components/Sort/Sort'
+import {
+  Categories,
+  Pagination,
+  PizzaBlock,
+  PizzasErrorBlock,
+  PizzasNotFoundBlock,
+  SkeletonPizzaBlock,
+  Sort,
+} from '../Components/'
+import {sortList} from '../Components/Sort'
 import {setCategoryId, setCurrentPage, setFilters} from '../redux/filter/filterSlice'
 import {selectFilter, selectSearchValue} from '../redux/filter/selectors'
 import {TFilters} from '../redux/filter/types'
@@ -19,6 +22,7 @@ import {AppDispatch} from '../redux/store'
 const Home = () => {
   const searchValue = useSelector(selectSearchValue)
   const {items, status} = useSelector(selectPizzaData)
+
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 
@@ -110,6 +114,7 @@ const Home = () => {
         <>
           <h2 className='content__title'>Все пиццы</h2>
           <div className='content__items'>{status === 'loadind' ? skeletons : pizzas}</div>
+
           <Pagination
             currentPage={currentPage}
             onPageChanged={onClickPage}

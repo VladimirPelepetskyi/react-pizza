@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import {FC} from 'react'
 
-const PizzasErrorBlock: FC = () => {
+export const PizzasErrorBlock: FC = () => {
   return (
     <div className='content__error-info'>
       <h1>Произошла ошибка 😕</h1>
@@ -10,7 +10,5 @@ const PizzasErrorBlock: FC = () => {
         Попробуйте повторить попытку позже.
       </p>
     </div>
-  );
-};
-
-export default PizzasErrorBlock;
+  )
+}
